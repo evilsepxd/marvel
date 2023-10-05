@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import useMarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
@@ -52,30 +53,31 @@ const CharList = (props) => {
 			}
 
 			return (
-				<li className="char__item"
-					key={i}
-					tabIndex={0}
-					ref={(el) => itemRefs.current[i] = el}
-					onClick={() => {
-					props.onCharSelected(item.id);
-					focusOnItem(i);
-					}}
-					onKeyDown={e => {
-					if (e.key === ' ' || e.key === 'Enter') {
-						props.onCharSelected(item.id);
-						focusOnItem(i);
-					}
-					}}>
-					<img src={item.thumbnail} alt={item.name} style={imgStyle}/>
-					<div className="char__name">{item.name}</div>
-				</li>
+				<CSSTransition key={i} in={true} timeout={1000} classNames='char__item' >
+					<li className="char__item"
+						tabIndex={0}
+						ref={(el) => itemRefs.current[i] = el}
+						onClick={() => {
+							props.onCharSelected(item.id);
+							focusOnItem(i);
+						}}
+						onKeyDown={e => {
+							if (e.key === ' ' || e.key === 'Enter') {
+								props.onCharSelected(item.id);
+								focusOnItem(i);
+							}
+						}}>
+						<img src={item.thumbnail} alt={item.name} style={imgStyle}/>
+						<div className="char__name">{item.name}</div>
+					</li>
+				</CSSTransition>
 			);
 		});
 
 		return (
-			<ul className="char__grid">
+			<TransitionGroup component={'ul'} className='char__grid' >
 				{items}
-			</ul>
+			</TransitionGroup>
 		);
 	}
 

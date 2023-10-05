@@ -1,0 +1,32 @@
+@import '../../style/variables.scss';
+
+.single-char {
+	margin-top: 50px;
+
+	display: grid;
+	grid-template-rows: auto;
+	grid-template-columns: 293px auto auto;
+	column-gap: 50px;
+	font-family: Roboto Condensed;
+	&__name {
+		color: #000;
+		font-size: 22px;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+	&__img {
+		grid-column: 1 / 2;
+		width: 100%;
+	}
+	&__descr {
+		margin-top: 25px;
+
+		color: #000;
+		font-size: 18px;
+		font-weight: 400;
+	}
+	&__btn {
+		align-self: start;
+		justify-self: end;
+	}
+}
